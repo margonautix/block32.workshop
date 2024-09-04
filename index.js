@@ -14,7 +14,7 @@ app.use(require("morgan")("dev"));
 // Create Flavors - C
 app.post("/api/flavors", async (req, res, next) => {
   try {
-    const SQL = `
+    const SQL = /* sql */ `
         INSERT INTO flavors(txt)
         VALUES($1)
         RETURNING *
@@ -29,7 +29,7 @@ app.post("/api/flavors", async (req, res, next) => {
 // Read Flavors - R
 app.get("/api/flavors", async (req, res, next) => {
   try {
-    const SQL = `
+    const SQL = /* sql */ `
         SELECT * from flavors ORDER BY created_at DESC;
       `;
     const response = await client.query(SQL);
@@ -42,7 +42,7 @@ app.get("/api/flavors", async (req, res, next) => {
 // Update Flavors - U
 app.put("/api/flavors/:id", async (req, res, next) => {
   try {
-    const SQL = `
+    const SQL = /* sql */ `
         UPDATE flavors
         SET txt=$1, ranking=$2, updated_at= now()
         WHERE id=$3 RETURNING *
@@ -61,7 +61,7 @@ app.put("/api/flavors/:id", async (req, res, next) => {
 // Delete Flavors - D
 app.delete("/api/flavors/:id", async (req, res, next) => {
   try {
-    const SQL = `
+    const SQL = /* sql */ `
         DELETE from flavors
         WHERE id = $1
       `;
